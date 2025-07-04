@@ -1,5 +1,6 @@
-# life-of-menard 📜🗡️  
-*A branch-and-duel experiment that tries to “grow” **Don Quijote** out of Pierre Menard’s diary—powered by the open-weight **Hrönir Encyclopedia** engine.*
+# life-of-menard 📜🗡️
+
+_A branch-and-duel experiment that tries to “grow” **Don Quijote** out of Pierre Menard’s diary—powered by the open-weight **Hrönir Encyclopedia** engine._
 
 ---
 
@@ -8,13 +9,13 @@
 > **Ultimate objective**  
 > Discover—through branching biographies, duels, and OpenSkill ratings—one deterministic sequence of Pierre Menard’s diary fragments that, when concatenated with locked slices of the authentic Spanish **_Don Quijote_**, makes a temperature-0 open-weight LLM reproduce the novel **letter-for-letter**.
 
-Workflow in a nutshell  
+Workflow in a nutshell
 
-1. Contributors craft diary fragments (*hrönirs*) about Menard’s successive lives.  
-2. Competing biographies (paths) duel for each position; votes + OpenSkill decide winners; the temporal cascade selects a canonical path.  
-3. Every even position is auto-filled with the next 2 000-character slice of the ground-truth *Quijote* text.  
-4. After each cascade we feed the full canon (odd diary + even Quijote) to a zero-temperature **open-weight** LLM and store the SHA-256 of its output.  
-5. When that SHA equals the reference edition’s SHA, the project is complete.  
+1. Contributors craft diary fragments (_hrönirs_) about Menard’s successive lives.
+2. Competing biographies (paths) duel for each position; votes + OpenSkill decide winners; the temporal cascade selects a canonical path.
+3. Every even position is auto-filled with the next 2 000-character slice of the ground-truth _Quijote_ text.
+4. After each cascade we feed the full canon (odd diary + even Quijote) to a zero-temperature **open-weight** LLM and store the SHA-256 of its output.
+5. When that SHA equals the reference edition’s SHA, the project is complete.
 
 Position 0 is immutable (“Menard’s manifesto”). Voting on pos 0 is rejected.
 
@@ -22,12 +23,12 @@ Position 0 is immutable (“Menard’s manifesto”). Voting on pos 0 is rejecte
 
 ## 2 Project status
 
-| Phase | Progress |
-|-------|----------|
-| **P0** base engine      | ✅ Hrönir core (paths • duels • OpenSkill) |
-| **P1** Menard extensions| ✅ ref-text interlock, CLI guards, SHA tests |
-| **P2** community launch | ⏳ first duel tournament |
-| **Finish line**         | LLM output SHA = reference SHA 🚀 |
+| Phase                    | Progress                                     |
+| ------------------------ | -------------------------------------------- |
+| **P0** base engine       | ✅ Hrönir core (paths • duels • OpenSkill)   |
+| **P1** Menard extensions | ✅ ref-text interlock, CLI guards, SHA tests |
+| **P2** community launch  | ⏳ first duel tournament                     |
+| **Finish line**          | LLM output SHA = reference SHA 🚀            |
 
 ---
 
@@ -46,7 +47,7 @@ life-of-menard/
 │  ├─ ledger_protocol.md
 │  └─ flow.svg
 └─ tests/
-````
+```
 
 ---
 
@@ -56,11 +57,11 @@ life-of-menard/
 python -m pip install -r requirements.txt
 ```
 
-* Python 3.10+
-* DuckDB ≥ 0.10
-* `openskill` 1.x
-* Typer, Pydantic, Rich
-* **Open-weight** LLM endpoint (e.g. Llama 3, Mistral, Phi-3) capable of deterministic generation (`temperature=0`)
+- Python 3.10+
+- DuckDB ≥ 0.10
+- `openskill` 1.x
+- Typer, Pydantic, Rich
+- **Open-weight** LLM endpoint (e.g. Llama 3, Mistral, Phi-3) capable of deterministic generation (`temperature=0`)
 
 ---
 
@@ -91,10 +92,10 @@ Run `hronir --help` to see all commands.
 
 ## 6 Voting-token maths
 
-* Every **path UUID** is a one-shot voting token.
-* **Voting power** = `ceil(sqrt(position))` (max one vote per position).
-* Token burns after first use; unused power is lost.
-* Position 0 tokens don’t exist.
+- Every **path UUID** is a one-shot voting token.
+- **Voting power** = `ceil(sqrt(position))` (max one vote per position).
+- Token burns after first use; unused power is lost.
+- Position 0 tokens don’t exist.
 
 ---
 
@@ -102,9 +103,9 @@ Run `hronir --help` to see all commands.
 
 ### 7.1 Reference edition
 
-* **File**: `data/quijote_ref.txt`
-* **SHA-256**: `9f03d754…` (stored as `REF_QUX_SHA`)
-* UTF-8, stripped—no extra whitespace.
+- **File**: `data/quijote_ref.txt`
+- **SHA-256**: `9f03d754…` (stored as `REF_QUX_SHA`)
+- UTF-8, stripped—no extra whitespace.
 
 ### 7.2 Position mapping
 
@@ -135,8 +136,8 @@ text, reproduce Miguel de Cervantes’ novel verbatim, no commentary.
 === END ===
 ```
 
-* Parameters: `temperature=0.0`, `top_p=1.0`, `seed=42` (if supported).
-* `cli.test-quixote` concatenates canon, calls the model, stores `llm_sha`; success when `llm_sha == REF_QUX_SHA`.
+- Parameters: `temperature=0.0`, `top_p=1.0`, `seed=42` (if supported).
+- `cli.test-quixote` concatenates canon, calls the model, stores `llm_sha`; success when `llm_sha == REF_QUX_SHA`.
 
 ---
 
@@ -169,9 +170,9 @@ pytest -q
 
 Key checks:
 
-* pos 0 voting guard
-* duel flow increments OpenSkill ratings
-* fixture canon → correct Quijote SHA
+- pos 0 voting guard
+- duel flow increments OpenSkill ratings
+- fixture canon → correct Quijote SHA
 
 ---
 
@@ -187,10 +188,9 @@ See `CONTRIBUTING.md` for details.
 
 ## 12 License
 
-* Code: MIT
-* Diary content: CC-BY-SA 4.0 (unless PD)
-* Reference Quijote: Project Gutenberg (public domain)
-* LLM weights: respect each model’s open license (Llama 3, Mistral-AI OSL-v0.1, etc.).
+- Code: MIT
+- Diary content: CC-BY-SA 4.0 (unless PD)
+- Reference Quijote: Project Gutenberg (public domain)
+- LLM weights: respect each model’s open license (Llama 3, Mistral-AI OSL-v0.1, etc.).
 
-*Happy dueling—may your Menard fragment survive to unlock the one true Quijote!*
-
+_Happy dueling—may your Menard fragment survive to unlock the one true Quijote!_
